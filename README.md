@@ -100,7 +100,18 @@ I created a Tableau dashboard with:
 
 \- A scatter plot showing the relationship between FICO scores and debt-to-income ratios, color-coded by risk level
 
+## Model risk tiers vs FICO tiers
 
+My first risk tiers in SQL used simple FICO score cutoffs. To see if my model does better, I grouped borrowers by the model's predicted default probability instead. I kept the same tier sizes as the FICO tiers (34%, 45%, and 21% of loans) so the comparison is fair. All numbers come from the 20% test set of 268,987 loans.
+
+![Model tiers vs FICO tiers](model_vs_fico_tiers.png)
+
+* In the high risk tier, 32.2% of loans defaulted with my model, compared to 25.0% with the FICO rule
+* My model's high risk tier caught 55% of all defaults, compared to 43% for the FICO rule
+* In the low risk tier, only 6.7% of loans defaulted with my model, compared to 11.7% with the FICO rule
+* Interest rate had the biggest effect on default risk, followed by annual income (higher income means lower risk) and loan amount
+
+This means a lender could use the model's tiers to catch more risky loans and approve safer loans with more confidence. The code is in `model_tiers_cells.ipynb`. Run those cells at the end of `Credit_Analysis_Project.ipynb`, since they use the model and test set from that notebook.
 
 
 
